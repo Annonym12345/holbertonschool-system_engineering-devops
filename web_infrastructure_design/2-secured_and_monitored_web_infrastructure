@@ -1,0 +1,30 @@
+graph TD
+    A[User] --> B[HTTPS]
+
+    B --> C[Firewall]
+    C --> D[HAProxy Load Balancer + SSL Certificate]
+
+    D --> E[Firewall Server 1]
+    D --> F[Firewall Server 2]
+
+    subgraph Server1
+        E --> G[Nginx]
+        G --> H[Application Server]
+        H --> I[Application Files]
+        M[Monitoring Client]
+    end
+
+    subgraph Server2
+        F --> J[Nginx]
+        J --> K[Application Server]
+        K --> L[Application Files]
+        N[Monitoring Client]
+    end
+
+    O[MySQL Primary + Monitoring Client]
+    P[MySQL Replica]
+
+    H --> O
+    K --> O
+
+    O --> P

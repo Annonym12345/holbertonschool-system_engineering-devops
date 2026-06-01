@@ -1,0 +1,21 @@
+graph TD
+    A[User] --> B[www.foobar.com]
+    B --> C[HAProxy Load Balancer]
+
+    C --> D[Nginx Server 1]
+    C --> E[Nginx Server 2]
+
+    subgraph Server1
+        D --> F[Application Server 1]
+        F --> G[Application Files 1]
+    end
+
+    subgraph Server2
+        E --> H[Application Server 2]
+        H --> I[Application Files 2]
+    end
+
+    J[MySQL Primary] --> K[MySQL Replica]
+
+    F --> J
+    H --> J
