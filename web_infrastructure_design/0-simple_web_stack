@@ -1,16 +1,29 @@
-graph TD
-    A[User] --> B[www.foobar.com]
-    B --> C[A Record: 8.8.8.8]
-
-    subgraph Server [Server 8.8.8.8]
-        D[Nginx Web Server]
-        E[Application Server]
-        F[Application Files]
-        G[MySQL Database]
-
-        D --> E
-        E --> F
-        E --> G
-    end
-
-    C --> D
+                User
+                  |
+                  | HTTP/HTTPS
+                  |
+          www.foobar.com
+                  |
+             A Record
+                  |
+               8.8.8.8
+                  |
+    +--------------------------------+
+    |            SERVER              |
+    |                                |
+    |  +--------------------------+  |
+    |  |      Nginx Web Server    |  |
+    |  +------------+-------------+  |
+    |               |                |
+    |  +------------v-------------+  |
+    |  |    Application Server    |  |
+    |  +------------+-------------+  |
+    |               |                |
+    |  +------------v-------------+  |
+    |  |    Application Files     |  |
+    |  +------------+-------------+  |
+    |               |                |
+    |  +------------v-------------+  |
+    |  |      MySQL Database      |  |
+    |  +--------------------------+  |
+    +--------------------------------+
