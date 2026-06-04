@@ -1,14 +1,27 @@
-graph TD
-    A[User] --> B[www.foobar.com]
-
-    B --> C[HAProxy Load Balancer 1]
-    C --> D[HAProxy Load Balancer 2]
-
-    D --> E[Web Server 1 - Nginx]
-    D --> F[Web Server 2 - Nginx]
-
-    E --> G[Application Server]
-    F --> G
-
-    G --> H[MySQL Primary]
-    H --> I[MySQL Replica]
+                           Internet
+                               |
+                  +------------+------------+
+                  |      HAProxy #1         |
+                  +------------+------------+
+                               |
+                  +------------+------------+
+                  |      HAProxy #2         |
+                  |     (Clustered)         |
+                  +------------+------------+
+                               |
+               +---------------+---------------+
+               |                               |
+       +-------v-------+               +-------v-------+
+       | Web Server 1  |               | Web Server 2  |
+       |     Nginx     |               |     Nginx     |
+       +-------+-------+               +-------+-------+
+               |                               |
+               +---------------+---------------+
+                               |
+                    +----------v----------+
+                    | Application Server  |
+                    +----------+----------+
+                               |
+                    +----------v----------+
+                    |    MySQL Server     |
+                    +---------------------+
